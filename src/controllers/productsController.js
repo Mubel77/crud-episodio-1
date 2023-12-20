@@ -106,7 +106,12 @@ const controller = {
 		storeProduct(productosNoEliminado)
 
 		return res.redirect('/'); 
-	}
+	},
+	// products - products list
+	products: (req, res) => {
+		console.log('Productos:', visited, inSale);
+		res.send("products"); // Asegúrate de tener un archivo products.ejs en tu directorio de vistas
+	  },
 };
 
 module.exports = controller;
