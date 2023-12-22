@@ -18,13 +18,9 @@ const controller = {
 	// Root - Show all products
 	index: (req, res) => {
 		// Do the magic
-		const products = getJson();
-		const visited = products.filter(product => product.category == "visited");
-		visited.forEach(element => {
-			
-		});
-		const inSale = products.filter(product => product.category == "in-sale");
-		res.render('index',{visited,inSale,toThousand});
+		// res.send("estoy aci")
+		const products = getJson(); 
+		res.render("products", { products, toThousand }); 
 	},
 
 	// Detail - Detail from one product
@@ -108,10 +104,10 @@ const controller = {
 		return res.redirect('/'); 
 	},
 	// products - products list
-	products: (req, res) => {
-		console.log('Productos:', visited, inSale);
-		res.send("products"); // Asegúrate de tener un archivo products.ejs en tu directorio de vistas
-	  },
+	// products: (req, res) => {
+	// 	const products = getJson(); 
+	// 	res.render("products", { products, toThousand }); 
+	// }
 };
 
 module.exports = controller;
