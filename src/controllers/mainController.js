@@ -22,17 +22,16 @@ const controller = {
 		res.render('index',{visited,inSale,toThousand});
 	},
 	search: (req, res) => {
-		const searchBusquedaProducto = (req.query.q || '').toLowerCase();
-		const products = getJson();
-	
-		const searchResultado = products.filter(product => {
-			const nameMatcheo = product.name.toLowerCase().includes(searchBusquedaProducto);
-			// includes, estás buscando si el término de búsqueda está contenido en el nombre o la descripción del producto. Esto permite que la búsqueda sea más flexible y coincida con productos que tengan similitud en el nombre con el término buscado.
-	
-			return nameMatcheo;
+		const busqueda = req.query.keywords;
+		const resultado = [];
+
+		products.forEach(producto => {
+			if (producto.name.toLowerCase().includes(busqueda.toLowerCase())) {
+				resultado.push(producto);
+			}
 		});
-	
-		res.render('results', { searchResultado, searchBusquedaProducto, toThousand });
+		
+		res.render('results', { resultado, toThousand, busqueda });
 	}
 };
 	
