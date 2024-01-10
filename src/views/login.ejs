@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<!-- Include Head -->
+<%- include('partials/head', {title: 'login'}) %>
+<body>
+    <main>
+        <form action="/users/login" method="POST">
+            <label for="first_name">Nombre:</label>
+            <input type="text" name="first_name" id="first_name" value="<%= res.locals.old && res.locals.old.first_name %>">
+            <% if (res.locals.errors && res.locals.errors.first_name) { %>
+               <p class="feedback"><%= res.locals.errors.first_name.msg %></p>
+            <% } %>
+            
+            <label for="last_name">Apellido:</label>
+            <input type="text" name="last_name" id="last_name" value="<%= res.locals.old && res.locals.old.last_name %>">
+            <% if (res.locals.errors && res.locals.errors.last_name) { %>
+               <p class="feedback"><%= res.locals.errors.last_name.msg %></p>
+            <% } %>
+            
+            <label for="password">Contraseña:</label>
+            <input type="password" name="password" id="password" value="<%= res.locals.old && res.locals.old.password %>">
+            <% if (res.locals.errors && res.locals.errors.password) { %>
+               <p class="feedback"><%= res.locals.errors.password.msg %></p>
+            <% } %>
+            
+            <div class="box_boton_login">
+                <a href="/users/register" id="login_password">
+                    <span>Olvidaste tu Contraseña?</span>
+                </a>
+                <div class="boton_login">
+                    <button type="submit">Ingresar</button>
+                </div> 
+            </div>
+        </form>
+    </main>
+    
+    <!-- footer -->
+    <%- include('partials/footer') %>
+    <!-- /footer -->
+</body>	
+</html>
