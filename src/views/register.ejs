@@ -1,41 +1,67 @@
 <!DOCTYPE html>
 <html lang="es">
 <!-- Include Head -->
-<%- include('partials/head', {title: 'register'}) %>
-<body>
-    <main>
-      <form action="/users/register" method="post">
-            <label for="name">Nombre:</label>
-            <input type="text" name="name" id="name" value="<%= res.locals.old && res.locals.old.name %>">
-            <% if (res.locals.errors && res.locals.errors.name) { %>
-               <p class="feedback"><%= res.locals.errors.name.msg %></p>
-            <% } %>
-            
+<%- include('partials/head', {title: 'register' }) %>
 
-            <label for="last-name">Apellido:</label>
-            <input type="text" name="last-name" id="last-name" value="<%= res.locals.old && res.locals.old.last-name %>">
-            <% if (res.locals.errors && res.locals.errors.name) { %>
-               <p class="feedback"><%= res.locals.errors.last-name.msg %></p>
-            <% } %>
-            
+  <body>
+    <!-- Header -->
+    <%- include('partials/headerNavbar') %>
+      <!-- /Header -->
+      <div class="container products-wrapper">
+        <div class="row">
+          <div class="col-12">
+            <h2 class="products-title">Crear usuario</h2>
+          </div>
+        </div>
+        <div class="col-12">
+          <form action="/users/register" method="POST">
+            <div class="row product-detail">
+              <div class="col-12 col-md-6">
+                <label for="nombre" class="form-label">Nombre:</label>
+                <input type="text" name="nombre" id="nombre" class="form-input" value="<%= locals.oldData ? oldData.nombre : null %>">
+                <% if (locals.errors && errors.nombre) { %>
+                  <p class="feedback">
+                    <%= errors.nombre.msg %>
+                  </p>
+                  <% } %>
+              </div>
+              <div class="col-12 col-md-6">
+                <label for="apellido" class="form-label">Apellido:</label>
+                <input type="text" name="apellido" id="apellido" class="form-input" value="<%= locals.oldData ? oldData.apellido : null %>">
+                <% if (locals.errors && errors.apellido) { %>
+                  <p class="feedback">
+                    <%= errors.apellido.msg %>
+                  </p>
+                  <% } %>
+              </div>
+              <div class="col-12 col-md-6">
+                <label for="email" class="form-label">Email:</label>
+                <input type="email" name="email" id="email" class="form-input"value="<%= locals.oldData ? oldData.email : null %>">
+                <% if (locals.errors && errors.email) { %>
+                  <p class="feedback">
+                    <%= errors.email.msg %>
+                  </p>
+                  <% } %>
+              </div>
+              <div class="col-12 col-md-6">
+                <label for="password" class="form-label">Contraseña:</label>
+                <input type="password" name="password" id="password" class="form-input" value="<%= locals.oldData ? oldData.password : null %>">
+                <% if (locals.errors && errors.password) { %>
+                  <p class="feedback">
+                    <%= errors.password.msg %>
+                  </p>
+                  <% } %>
+              </div>
+              <div class="col-12">
+                <button type="submit" class="buy-now-button">Registrarse</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+        <!-- footer -->
+        <%- include('partials/footer') %>
+          <!-- /footer -->
+  </body>
 
-            <label for="email">Correo electrónico:</label>
-            <input type="email" name="email" id="email" value="<%= res.locals.old && res.locals.old.email %>">
-            <% if (res.locals.errors && res.locals.errors.email) { %>
-               <p class="feedback"><%= res.locals.errors.email.msg %></p>
-            <% } %>
-
-            <label for="password">Contraseña:</label>
-            <input type="password" name="password" id="password" value="<%= res.locals.old && res.locals.old.password %>">
-            <% if (res.locals.errors && res.locals.errors.password) { %>
-               <p class="feedback"><%= res.locals.errors.password.msg %></p>
-            <% } %>
-
-            <button type="submit">Registrarse</button>
-        </form>
-    </main>
-	<!-- footer -->
-	<%- include('partials/footer') %>
-	<!-- /footer -->
-</body>	
 </html>

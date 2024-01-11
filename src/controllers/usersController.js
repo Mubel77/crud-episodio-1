@@ -7,28 +7,23 @@ const usersController = {
   },
 
   createUser: function(req, res, next) {
-    const users = leerArchivo('users');
-    const { first_name, 'last-name': lastName, email, password } = req.body;
-    const newUser = {
-      first_name: first_name.trim(),
-      lastName: lastName.trim(),
-      email: email.trim(),
-      password: password.trim()
-    };
 
-    const errors = validationResult(req);
+    const errors= validationResult(req);
 
-    if (errors.isEmpty()) {
+    if (errors.errors.length > 0){
+      res.render('register', { title: 'Registro', errors:errors.mapped(), oldData:req.body});
+    } else {
+      const users = leerArchivo('users');
+      const { nombre, apellido, email, password } = req.body;
+      const newUser = {
+        nombre: nombre,
+        apellido: apellido,
+        email: email,
+        password: password
+      };
       users.push(newUser);
       escribirArchivo(users, 'users');
       res.redirect('/');
-    } else {
-      // There are errors, render the registration form with error messages
-      res.render('register', {
-        title: 'Registro',
-        errors: errors.mapped(),
-        old: req.body
-      });
     }
   },
 
@@ -36,7 +31,7 @@ const usersController = {
     res.render('login', { title: 'Login' });
   },
 
-  loginUp: function(req, res, next) {
+  loginProccess: function(req, res, next) {
     res.redirect('/');
   },
 };

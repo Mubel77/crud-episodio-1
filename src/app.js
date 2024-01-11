@@ -6,7 +6,6 @@ const logger = require('morgan');
 const path = require('path');
 const methodOverride =  require('method-override'); // Pasar poder usar los métodos PUT y DELETE
 
-const { check, validationResult } = require('express-validator');
 
 // ************ express() - (don't touch) ************
 const app = express();
@@ -33,7 +32,7 @@ const usersRouter = require('./routes/users'); // Rutas /users
 
 app.use('/', mainRouter);
 app.use('/products', productsRouter);
-app.use('/users', validationResult, usersRouter);
+app.use('/users', usersRouter);
 
 
 
